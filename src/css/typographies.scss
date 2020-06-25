@@ -1,0 +1,11 @@
+@import "./fonts/heebo";
+@import "./fonts/montserrat";
+
+a {
+    color: $primary;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
