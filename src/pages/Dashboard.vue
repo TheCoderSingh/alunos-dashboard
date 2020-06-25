@@ -4,7 +4,7 @@
             Dashboard
         </page-title>
 
-        <q-card flat bordered class="my-card">
+        <q-card>
             <q-card-section>
                 <div class="text-h6">Our Changing Planet</div>
             </q-card-section>

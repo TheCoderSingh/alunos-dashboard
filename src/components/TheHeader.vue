@@ -1,18 +1,18 @@
 <template>
-  <q-header  class="bg-primary text-white" height-hint="64">
+  <q-header height-hint="64">
     <q-toolbar class="toolbar">
       <div class="row justify-between items-center" style="width: 100%;">
         <div class="col-auto">
-          <div class="toolbar__brand" :style="{ 'width': $q.screen.gt.sm ? '280px' : 'auto'}">
+          <div class="toolbar__brand" :style="{ 'width': $q.screen.gt.sm ? '260px' : 'auto'}">
             <img
-              src="https://www.monarchballroomdance.com/wp-content/uploads/2017/02/logo-placeholder.png"
+              src="../assets/images/logos/alunos_logo_white.png"
               class="toolbar__logo"
               v-if="$q.screen.gt.sm">
 
             <q-btn
               flat
-              class="q-card--bordered"
               dense
+              class="q-px-sm"
               v-if="!$q.screen.gt.sm"
               @click="$emit('toggleDrawer')"
               aria-label="Menu"
@@ -46,19 +46,20 @@ export default {
   .toolbar {
     padding-left: 0;
     background: $toolbar-bg;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
   &__brand {
      height: $header-height;
      background: $toolbar-brand-bg;
      display: flex;
-     justify-content: space-between;
+     justify-content: center;
      align-items: center;
      padding: 0 12px;
      margin-right: 12px;
    }
 
   &__logo {
-     max-width: 100px;
+     max-height: 48px;
    }
   }
 </style>

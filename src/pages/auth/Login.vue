@@ -4,7 +4,7 @@
             <q-img src="https://pbs.twimg.com/profile_images/1103732968474828801/HFTx87eX_400x400.png"></q-img>
         </q-avatar>
 
-        <card class="container">
+        <q-card class="container">
             <q-card-section>
                 <q-form
                     @submit="onSubmit"
@@ -29,23 +29,22 @@
                     />
 
                     <q-card-actions align="between">
-                        <router-link :to="{ name: 'dashboard' }">Forgot my password</router-link>
+                        <router-link class="text-link" :to="{ name: 'dashboard' }">Forgot my password</router-link>
                         <q-btn label="Login" type="submit" unelevated color="primary"/>
                     </q-card-actions>
                 </q-form>
 
             </q-card-section>
-        </card>
+        </q-card>
     </centered-content>
 </template>
 
 <script>
     import CenteredContent from "../../components/dumb/CenteredContent";
-    import Card from "../../components/dumb/Card";
 
     export default {
         name: 'Login',
-        components: {Card, CenteredContent},
+        components: {CenteredContent},
         data: () => ({
             email: '',
             password: '',

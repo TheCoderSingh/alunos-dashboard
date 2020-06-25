@@ -1,32 +1,46 @@
 <template>
-  <q-btn round flat class="menu">
-    <q-avatar size="42px">
-      <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-    </q-avatar>
-    <q-menu>
-      <q-list>
-        <q-item clickable class="menu__item">
-          <q-item-section avatar class="">
-            <q-icon name="login" />
-          </q-item-section>
+    <div class="menu">
+        <q-avatar size="48px" color="white" text-color="grey-10">
+            W
+        </q-avatar>
+        <q-menu :offset="[0, 4]" fit transition-show="jump-down" transition-hide="jump-up">
+            <q-list>
+                <q-item clickable class="menu__item">
 
-          <q-item-section>Logout</q-item-section>
-        </q-item>
-      </q-list>
-    </q-menu>
-  </q-btn>
+                    <q-item-section class="text-subtitle2">Change password</q-item-section>
+                    <q-item-section avatar>
+                        <q-icon name="lock" class="menu__icon"/>
+                    </q-item-section>
+                </q-item>
+                <q-separator></q-separator>
+                <q-item clickable class="menu__item" :to="{ name: 'auth.login' }" exact>
+                    <q-item-section class="text-subtitle2">Sign out</q-item-section>
+                    <q-item-section avatar>
+                        <q-icon name="login" class="menu__icon"/>
+                    </q-item-section>
+                </q-item>
+            </q-list>
+        </q-menu>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'UserMenu',
-}
+    export default {
+        name: 'UserMenu',
+    }
 </script>
 
 <style lang="scss">
-  .menu {
-    &__item {
-      width: auto;
+    .menu {
+        cursor: pointer;
+
+        &__item {
+            width: auto;
+            color: $grey-8;
+        }
+
+        &__icon {
+            color: $grey-6;
+        }
     }
-  }
 </style>

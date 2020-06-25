@@ -24,8 +24,21 @@ $negative  : #C10015;
 $info      : #31CCEC;
 $warning   : #F2C037;
 
+// Header
 $header-height: 64px;
 $toolbar-bg: $primary;
 $toolbar-brand-bg: darken($primary, 4%);
-$content-bg: #FBFCFD;
+
+// Content
+$content-bg: #f3f6fc;
+
+// Drawer
 $navigation-drawer-bg: #FFFFFF;
+
+// Shadows [Quasar]
+$layout-shadow: 0 0 10px 2px rgba(0,0,0,0.02), 0 0px 10px rgba(0,0,0,0.08);
+$shadow-color: #000;
+$elevation-umbra      : rgba($shadow-color, .1) !default
+$elevation-penumbra   : rgba($shadow-color, .08) !default
+$elevation-ambient    : rgba($shadow-color, .06) !default
+
