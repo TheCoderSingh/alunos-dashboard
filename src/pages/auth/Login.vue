@@ -8,12 +8,11 @@
             <q-card-section>
                 <q-form
                     @submit="onSubmit"
-                    @reset="onReset"
                     class="q-gutter-md"
                 >
                     <q-input
                         filled
-                        v-model="email"
+                        v-model="form.email"
                         label="Email"
                         lazy-rules
                         :rules="[ val => val && val.length > 0 || 'Please type your email']"
@@ -22,8 +21,9 @@
                     <q-input
                         filled
                         type="password"
-                        v-model="password"
+                        v-model="form.password"
                         label="Password"
+                        autocomplete="current-password"
                         lazy-rules
                         :rules="[ val => val && val.length > 0 || 'Please type your password']"
                     />
@@ -41,15 +41,35 @@
 
 <script>
     import CenteredContent from "../../components/dumb/CenteredContent";
+    import {displayError, displaySuccess} from "../../utils/notify";
+    import {LOGIN_ACTION} from "../../constants";
 
     export default {
         name: 'Login',
         components: {CenteredContent},
         data: () => ({
-            email: '',
-            password: '',
-            remember: false,
-        })
+            form: {
+                email: '',
+                password: '',
+            }
+        }),
+        methods: {
+            async onSubmit() {
+                try {
+                    await this.$store.dispatch(LOGIN_ACTION, this.form);
+
+                    displaySuccess('Access granted.', {
+                        position: 'top'
+                    });
+
+                    this.$router.push({name: 'dashboard'});
+                } catch (error) {
+                    displayError('Invalid credentials, please try again.', {
+                        position: 'top'
+                    });
+                }
+            },
+        }
     }
 </script>
 

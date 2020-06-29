@@ -14,7 +14,7 @@
                 </q-item>
                 <q-separator></q-separator>
                 <q-item clickable class="menu__item" :to="{ name: 'auth.login' }" exact>
-                    <q-item-section class="text-subtitle2">Sign out</q-item-section>
+                    <q-item-section class="text-subtitle2" @click="logout">Sign out</q-item-section>
                     <q-item-section avatar>
                         <q-icon name="login" class="menu__icon"/>
                     </q-item-section>
@@ -25,8 +25,19 @@
 </template>
 
 <script>
+    import {LOGOUT_ACTION} from "../constants";
+    import {displaySuccess} from "../utils/notify";
+
     export default {
         name: 'UserMenu',
+        methods: {
+            async logout() {
+                await this.$store.dispatch(LOGOUT_ACTION);
+                displaySuccess("You have been succesfully signed out.", {
+                    position: 'top'
+                });
+            }
+        }
     }
 </script>
 

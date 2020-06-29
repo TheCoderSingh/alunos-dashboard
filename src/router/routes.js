@@ -1,10 +1,19 @@
 const routes = [
     {
         path: '/',
+        redirect: { name: 'auth.login' }
+    },
+    {
+        path: '/auth',
         component: () => import('layouts/AuthLayout.vue'),
+        meta: {
+            isPublicOnly: true,
+        },
+        redirect: {name:'auth.login'},
         children: [
             {
-                path: '', component: () => import('pages/auth/Login.vue'),
+                path: 'login',
+                component: () => import('pages/auth/Login.vue'),
                 name: 'auth.login',
             }
         ]
@@ -12,6 +21,10 @@ const routes = [
     {
         path: '/admin',
         component: () => import('layouts/AdminLayout.vue'),
+        meta: {
+            isAuthOnly: true,
+        },
+        redirect: { name: 'dashboard' },
         children: [
             {
                 path: 'dashboard', component: () => import('pages/Dashboard.vue'),
@@ -21,8 +34,13 @@ const routes = [
     },
     // Fallback
     {
+        path: 'not-found',
+        component: () => import('pages/Error404.vue'),
+        name: '404',
+    },
+    {
         path: '*',
-        component: () => import('pages/Error404.vue')
+        component: () => import('pages/Error404.vue'),
     }
 ];
 

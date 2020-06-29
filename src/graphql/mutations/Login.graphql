@@ -1,0 +1,23 @@
+mutation ($email: String, $password: String)  {
+    loginAsAdmin(credentials: { email: $email, password: $password }) {
+        token {
+            token_type
+            expires_in
+            access_token
+            refresh_token
+        }
+        admin {
+            user {
+                id,
+                display_name,
+                email,
+                phone,
+                created_at,
+                updated_at
+            }
+            tenant {
+                name
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+query ($subdomain: String!) {
+    tenant(subdomain: $subdomain) {
+        name
+    }
+}
