@@ -11,3 +11,4 @@ export const GET_TENANT_ACTION = 'GET_TENANT_ACTION';
 
 // Other
 export const TOKEN_COOKIE = 'token';
+export const TENANT_HEADER = 'Alunos-Tenant';

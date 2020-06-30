@@ -88,7 +88,7 @@ module.exports = function (/* ctx */) {
             port: 8000,
             proxy: {
                 '/graphql': {
-                    target: '/', // Removes the port
+                    target: 'api.alunos.localhost/graphql', // Removes the port
                 }
             },
             open: true // opens browser window automatically

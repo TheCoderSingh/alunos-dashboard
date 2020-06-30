@@ -6,27 +6,30 @@ import VueApollo from 'vue-apollo';
 import {onError} from "apollo-link-error";
 import {ApolloLink, from} from "apollo-link";
 import {store} from '../store'
-import {LOGOUT_ACTION, TOKEN_COOKIE} from "src/constants";
+import {LOGOUT_ACTION, TENANT_HEADER, TOKEN_COOKIE} from "src/constants";
 import {displayWarning} from "src/utils/notify";
 import {hasAuthError} from "src/utils/errorHandler";
 import {Cookies} from "quasar";
+import {subdomain} from "src/utils/domain";
 
 Vue.use(VueApollo);
 
 const httpLink = createHttpLink({
-    uri: `${window.location.protocol}//${window.location.host}/graphql`,
+    uri: process.env.GRAPHQL_URI,
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
+    const headers = {
+        [TENANT_HEADER]: subdomain()
+    };
+
     const token = Cookies.get(TOKEN_COOKIE);
 
     if (token) {
-        operation.setContext({
-            headers: {
-                Authorization: `Bearer ${token.access_token}`,
-            }
-        });
+        headers['Authorization'] = `Bearer ${token.access_token}`;
     }
+
+    operation.setContext({ headers });
 
     return forward(operation);
 });
