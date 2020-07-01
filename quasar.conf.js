@@ -23,6 +23,7 @@ module.exports = function (/* ctx */) {
             'apollo',
             'tenant',
             'auth',
+            'flags',
         ],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -62,22 +63,30 @@ module.exports = function (/* ctx */) {
             // analyze: true,
 
             // Options below are automatically set depending on the env, set them if you want to override
-            // extractCSS: false,
+             extractCSS: true,
 
             // https://quasar.dev/quasar-cli/handling-webpack
+            chainWebpack (chain, { isServer, isClient }) {
+                chain.module.rule('images')
+                    .use('url-loader')
+                    .tap((options) => {
+                        options.name = 'img/[path][name].[ext]';
+                        return options
+                    });
+            },
             extendWebpack(cfg) {
                 cfg.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
                     loader: 'eslint-loader',
                     exclude: /node_modules/,
-                })
+                });
 
                 cfg.module.rules.push({
                     test: /\.(graphql|gql)$/,
                     exclude: /node_modules/,
                     loader: 'graphql-tag/loader',
-                })
+                });
             },
         },
 
@@ -88,7 +97,7 @@ module.exports = function (/* ctx */) {
             port: 8000,
             proxy: {
                 '/graphql': {
-                    target: 'api.alunos.localhost/graphql', // Removes the port
+                    target: 'http://api.alunos.localhost',
                 }
             },
             open: true // opens browser window automatically

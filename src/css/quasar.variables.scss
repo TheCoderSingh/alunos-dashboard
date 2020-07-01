@@ -24,10 +24,17 @@ $negative  : #C10015;
 $info      : #31CCEC;
 $warning   : #F2C037;
 
+// Font
+$body-font-size   : 14px;
+
 // Header
 $header-height: 64px;
 $toolbar-bg: $primary;
 $toolbar-brand-bg: darken($primary, 4%);
+$emphasis-text-color: rgba(0,0,0,0.87);
+$medium-emphasis-text-color: rgba(0,0,0,0.60);
+$low-emphasis-text-color: rgba(0,0,0,0.36);
+
 
 // Content
 $content-bg: #F4F5F7;

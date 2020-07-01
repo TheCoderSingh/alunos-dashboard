@@ -4,28 +4,48 @@
             Dashboard
         </page-title>
 
-        <q-card>
-            <q-card-section>
-                <div class="text-h6">Our Changing Planet</div>
-            </q-card-section>
-
-            <q-card-section class="q-pt-none">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.
-            </q-card-section>
-
-            <q-separator inset />
-
-            <q-card-section>
-                <q-table
-                    title="Lorem Ipsum"
-                    flat
-                    :data="data"
-                    :columns="columns"
-                    row-key="name"
-                />
-            </q-card-section>
-        </q-card>
+        <div class="row  q-gutter-lg">
+            <div class="col">
+                <indicator-card
+                    icon="las la-bed"
+                    icon-color="green-4"
+                    color="green-1"
+                    caption="Rooms Available"
+                >
+                    4
+                </indicator-card>
+            </div>
+            <div class="col">
+                <indicator-card
+                    icon="las la-graduation-cap"
+                    icon-color="blue-4"
+                    color="blue-1"
+                    caption="New Students"
+                >
+                    23
+                </indicator-card>
+            </div>
+            <div class="col">
+                <indicator-card
+                    icon="las la-home"
+                    icon-color="brown-4"
+                    color="brown-1"
+                    caption="New Households"
+                >
+                    8
+                </indicator-card>
+            </div>
+            <div class="col">
+                <indicator-card
+                    icon="las la-address-card"
+                    icon-color="red-4"
+                    color="red-1"
+                    caption="Pending Applications"
+                >
+                    3
+                </indicator-card>
+            </div>
+        </div>
 
     </centered-content>
 </template>
@@ -33,10 +53,11 @@
 <script>
     import CenteredContent from "../components/dumb/CenteredContent";
     import PageTitle from "../components/dumb/PageTitle";
+    import IndicatorCard from "../components/dumb/IndicatorCard";
 
     export default {
         name: 'PageIndex',
-        components: {PageTitle, CenteredContent},
+        components: {IndicatorCard, PageTitle, CenteredContent},
         data() {
             return {
                 columns: [

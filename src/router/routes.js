@@ -29,15 +29,23 @@ const routes = [
             {
                 path: 'dashboard', component: () => import('pages/Dashboard.vue'),
                 name: 'dashboard',
-            }
+            },
+            {
+                path: 'households', component: () => import('pages/households/HouseholdList.vue'),
+                name: 'households',
+            },
+            {
+                path: 'students', component: () => import('pages/students/StudentList.vue'),
+                name: 'students',
+            },
         ]
     },
-    // Fallback
     {
         path: 'not-found',
         component: () => import('pages/Error404.vue'),
         name: '404',
     },
+    // Fallback
     {
         path: '*',
         component: () => import('pages/Error404.vue'),
