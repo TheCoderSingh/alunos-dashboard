@@ -14,14 +14,16 @@
             <div class="user">
                 <div class="column items-center q-col-gutter-sm q-my-lg">
                     <div class="col">
-                        <q-avatar class="q-mr-sm user__avatar" size="100px">
-                            <img src="https://lh3.googleusercontent.com/ogw/ADGmqu8_T25h9p7SA5aEJBdWNbQnGWgscqDVUPhiLv9m=s83-c-mo">
-                        </q-avatar>
+                        <user-avatar
+                            size="100px"
+                            class="shadow-6 q-mr-sm "
+                            :name="user.display_name"
+                            :image="user.avatar ? user.avatar.url : null"></user-avatar>
                     </div>
                     <div class="col text-center">
                         <div>
                             <span class="user__greeting">Hello,</span>
-                            <h6 class="user__name">Walter</h6>
+                            <h6 class="user__name">{{ user.display_name }}</h6>
                         </div>
                     </div>
                 </div>
@@ -81,7 +83,7 @@
 
                 <q-item-label class="drawer__header" header>Manage</q-item-label>
 
-                <q-item class="drawer__item " v-ripple clickable>
+                <q-item class="drawer__item " v-ripple clickable :to="{ name: 'admins' }">
                     <q-item-section avatar class="drawer__icon">
                         <q-icon name="la la-user"/>
                     </q-item-section>
@@ -104,8 +106,12 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+    import UserAvatar from "./UserAvatar";
+
     export default {
         name: 'TheNavigationDrawer',
+        components: {UserAvatar},
         data: () => ({
            isOpen: false,
         }),
@@ -113,6 +119,11 @@
             toggle() {
                 this.isOpen = !this.isOpen;
             }
+        },
+        computed: {
+            ...mapGetters({
+                user: 'getCurrentUser',
+            })
         }
     }
 </script>
@@ -123,10 +134,6 @@
     }
 
     .user {
-        &__avatar {
-            box-shadow: $shadow-6;
-        }
-
         &__greeting {
             color: $medium-emphasis-text-color;
         }

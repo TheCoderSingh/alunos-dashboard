@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {ApolloClient} from 'apollo-client'
-import {createHttpLink} from 'apollo-link-http'
+import {createUploadLink} from 'apollo-upload-client'
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo';
 import {onError} from "apollo-link-error";
@@ -14,7 +14,7 @@ import {subdomain} from "src/utils/domain";
 
 Vue.use(VueApollo);
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
     uri: process.env.GRAPHQL_URI,
 });
 

@@ -1,256 +1,371 @@
 # This file was generated based on ".graphqlconfig". Do not edit manually.
 
 schema {
-  query: Query
-  mutation: Mutation
+    query: Query
+    mutation: Mutation
 }
 
-type Activity {
-  description: String!
-}
-
-type ActivityPagination {
-  items: [Activity]
-  total: Int
-}
+union FeedAuthor = Issue | Resident
 
 type Admin {
-  tenant: Tenant
-  user: User
+    id: ID!
+    role: Int
+    tenant: Tenant
+    user: User
 }
 
 type AdminAccess {
-  admin: Admin
-  token: OAuthToken
+    admin: Admin
+    token: OAuthToken
 }
 
-type Announcement {
-  author: User
-  content: String!
+type Allergy {
+    "Description of the allergy"
+    description: String
 }
 
-type AnnouncementPagination {
-  items: [Announcement]
-  total: Int
+type Country {
+    "2 digit ISO code"
+    code: String
+    "Primary language spoken in the country"
+    language: Language
+    "Name of the country"
+    name: String
+    "Numerical code"
+    numeric_code: Int
+}
+
+type FeedEntries {
+    items: [FeedEntry]
+    total: Int
+}
+
+type FeedEntry {
+    author: FeedAuthor
+    content: String!
+    created_at: DateTimeTz
+}
+
+type FileUpload {
+    mime: String
+    name: String
+    url: String
+}
+
+type Food {
+    "Name of the food"
+    name: String!
+}
+
+type FoodPreference {
+    "The food"
+    food: Food
+    "The preference regarding the food"
+    preference: Int
+}
+
+type Guideline {
+    description: String!
+}
+
+type Hobby {
+    "Description of the hobby"
+    description: String
 }
 
 type Household {
-  address: String!
-  created_at: String!
-  id: ID!
-  members: [Member]
-  name: String!
-  rooms: [Room]
-  rules: [Rule]
-  type: HouseholdType!
-  updated_at: String!
+    address: String!
+    created_at: String!
+    guidelines: [Guideline]
+    id: ID!
+    name: String!
+    residents: [Resident]
+    rooms: [Room]
+    type: HouseholdType!
+    updated_at: String!
 }
 
 type Issue {
-  author: Member!
-  description: String!
-  solved_at: DateTimeTz
+    "The author of the issue report"
+    author: Resident
+    "Desscription of the issue"
+    description: String!
+    "Unique identifier"
+    id: ID!
+    "Date the issue was resolved"
+    solved_at: DateTimeTz
+    "Title of the issue"
+    title: String!
 }
 
 type IssuePagination {
-  items: [Issue]
-  total: Int
+    items: [Issue]
+    total: Int
 }
 
-type Member {
-  household: Household
-  is_admin: Boolean
-  is_permanent: Boolean
-  user: User
-}
-
-type MemberAccess {
-  member: Member
-  token: OAuthToken
+type Language {
+    "Name of the language"
+    name: String
 }
 
 type Mutation {
-  loginAsAdmin(credentials: PasswordLoginInput): AdminAccess
-  loginAsHouseholdMember(token: String): MemberAccess
-  requestLoginAsHouseholdMember(email: String): Boolean
-  signUp(email: String, name: String, password: String, phone: String): User
+    createFeedEntry(input: FeedEntryInput): Issue
+    createIssue(input: IssueInput): Issue
+    loginAsAdmin(credentials: PasswordLoginInput): AdminAccess
+    loginAsResident(token: String): ResidentAccess
+    removeIssue(id: ID!): Issue
+    requestLoginAsResident(email: String): Boolean
+    signUp(email: String, name: String, password: String, phone: String): User
+    solveIssue(id: ID!): Issue
+    temporaryMobileLogin(email: String): String
+    updateFoodPreference(input: FoodPreferenceInput): FoodPreference
+    updateMe(input: MeInput): User
 }
 
 type OAuthToken {
-  access_token: String
-  expires_in: Int
-  refresh_token: String
-  token_type: String
+    access_token: String
+    expires_in: Int
+    refresh_token: String
+    token_type: String
 }
 
 "Pagination information about the corresponding list of items."
 type PageInfo {
-  "Count of nodes in current request."
-  count: Int
-  "Current page of request."
-  currentPage: Int
-  "When paginating forwards, the cursor to continue."
-  endCursor: String
-  "When paginating forwards, are there more items?"
-  hasNextPage: Boolean!
-  "When paginating backwards, are there more items?"
-  hasPreviousPage: Boolean!
-  "Last page in connection."
-  lastPage: Int
-  "When paginating backwards, the cursor to continue."
-  startCursor: String
-  "Total number of node in connection."
-  total: Int
+    "Count of nodes in current request."
+    count: Int
+    "Current page of request."
+    currentPage: Int
+    "When paginating forwards, the cursor to continue."
+    endCursor: String
+    "When paginating forwards, are there more items?"
+    hasNextPage: Boolean!
+    "When paginating backwards, are there more items?"
+    hasPreviousPage: Boolean!
+    "Last page in connection."
+    lastPage: Int
+    "When paginating backwards, the cursor to continue."
+    startCursor: String
+    "Total number of node in connection."
+    total: Int
 }
 
 "Pagination information about the corresponding list of items."
 type PaginatorInfo {
-  "Total count of available items in the page."
-  count: Int!
-  "Current pagination page."
-  currentPage: Int!
-  "Index of first item in the current page."
-  firstItem: Int
-  "If collection has more pages."
-  hasMorePages: Boolean!
-  "Index of last item in the current page."
-  lastItem: Int
-  "Last page number of the collection."
-  lastPage: Int!
-  "Number of items per page in the collection."
-  perPage: Int!
-  "Total items available in the collection."
-  total: Int!
+    "Total count of available items in the page."
+    count: Int!
+    "Current pagination page."
+    currentPage: Int!
+    "Index of first item in the current page."
+    firstItem: Int
+    "If collection has more pages."
+    hasMorePages: Boolean!
+    "Index of last item in the current page."
+    lastItem: Int
+    "Last page number of the collection."
+    lastPage: Int!
+    "Number of items per page in the collection."
+    perPage: Int!
+    "Total items available in the collection."
+    total: Int!
 }
 
 type Pong {
-  pong: String
+    pong: String
+}
+
+type Profile {
+    "List of allergies"
+    allergies: [Allergy!]
+    "Biography"
+    biography: String
+    "Date of birth"
+    birthdate: Date
+    "Country of birth"
+    country: Country
+    "List of food preferences"
+    food_preferences: [FoodPreference!]
+    "List of hobbies"
+    hobbies: [Hobby!]
+    "Unique identifier"
+    id: ID!
+    "Native language spoken"
+    language: Language
 }
 
 type Query {
-  "Get details about household"
-  household(
-    #Household unique identifier
-    household_id: ID
-  ): Household
-  "Get activities of household"
-  householdActivities(
-    #Household unique identifier
-    household_id: ID,
-    #Number of elements per page
-    limit: Int = 10,
-    #Page
-    page: Int = 1
-  ): ActivityPagination
-  "Get announcements of household"
-  householdAnnouncements(
-    #Household unique identifier
-    household_id: ID,
-    #Number of elements per page
-    limit: Int = 10,
-    #Page
-    page: Int = 1
-  ): AnnouncementPagination
-  "Get announcements of household"
-  householdIssues(
-    #Household unique identifier
-    household_id: ID,
-    #Number of elements per page
-    limit: Int = 10,
-    #Page
-    page: Int = 1
-  ): IssuePagination
-  me: User
-  ping: Pong
-  privatePing: Pong
-  "Get details about tenant"
-  tenant(
-    #Tenant unique subdomain
-    subdomain: String!
-  ): Tenant
+    adminFromToken: Admin
+    "Get announcements of household"
+    feed(
+        "Household unique identifier"
+        household_id: ID,
+        "Number of elements per page"
+        limit: Int = 10,
+        "Page"
+        page: Int = 1
+    ): FeedEntries
+    "Get details about household"
+    household(
+        "Household unique identifier"
+        id: ID
+    ): Household
+    "Get announcements of household"
+    issues(
+        "Household unique identifier"
+        household_id: ID,
+        "Number of elements per page"
+        limit: Int = 10,
+        "Page"
+        page: Int = 1
+    ): IssuePagination
+    ping: Pong
+    privatePing: Pong
+    "Get details about tenant"
+    tenant(
+        "Tenant unique subdomain"
+        subdomain: String!
+    ): Tenant
+}
+
+type Resident {
+    "The household"
+    household: Household
+    "Unique identifier"
+    id: ID!
+    "If the member have management capabilities"
+    is_admin: Boolean
+    "If the member is a permanent resident of the household"
+    is_permanent: Boolean
+    "The user"
+    user: User
+}
+
+type ResidentAccess {
+    member: Resident
+    token: OAuthToken
 }
 
 type Room {
-  name: String!
-}
-
-type Rule {
-  description: String!
+    name: String!
 }
 
 type Tenant {
-  name: String!
+    name: String!
 }
 
 type User {
-  avatar: String!
-  created_at: String!
-  display_name: String!
-  email: String!
-  first_name: String!
-  id: ID!
-  last_name: String!
-  phone: String!
-  updated_at: String!
+    "Avatar"
+    avatar: FileUpload
+    "Display name"
+    display_name: String!
+    "Email"
+    email: String!
+    "First name"
+    first_name: String!
+    "Unique identifier"
+    id: ID!
+    "Last name"
+    last_name: String!
+    "Phone"
+    phone: String!
+    "User profile"
+    profile: Profile
 }
 
 enum ContactType {
-  #Email
-  EMAIL
-  #Facebook
-  FACEBOOK
-  #Instagram
-  INSTAGRAM
-  #Phone
-  PHONE
-  #Twitter
-  TWITTER
+    "Email"
+    EMAIL
+    "Facebook"
+    FACEBOOK
+    "Instagram"
+    INSTAGRAM
+    "Phone"
+    PHONE
+    "Twitter"
+    TWITTER
 }
 
 enum HouseholdType {
-  #Homestay
-  HOMESTAY
-  #Student
-  STUDENT
+    "Homestay"
+    HOMESTAY
+    "Student"
+    STUDENT
 }
 
 "The available directions for ordering a list of records."
 enum SortOrder {
-  #Sort records in ascending order.
-  ASC
-  #Sort records in descending order.
-  DESC
+    "Sort records in ascending order."
+    ASC
+    "Sort records in descending order."
+    DESC
 }
 
 "Specify if you want to include or exclude trashed results from a query."
 enum Trashed {
-  #Only return trashed results.
-  ONLY
-  #Return both trashed and non-trashed results.
-  WITH
-  #Only return non-trashed results.
-  WITHOUT
+    "Only return trashed results."
+    ONLY
+    "Return both trashed and non-trashed results."
+    WITH
+    "Only return non-trashed results."
+    WITHOUT
+}
+
+input FeedEntryInput {
+    "Unique identifier of the resident who is posting"
+    author_id: ID!
+    "The content"
+    content: String!
+    "Household unique identifier"
+    household_id: ID!
+}
+
+input FoodPreferenceInput {
+    "The identifier of the food"
+    food_id: ID!
+    "The preference regarding the food"
+    preference: Int
+}
+
+input IssueInput {
+    "The identifier of the resident who reported the issue"
+    author_id: ID!
+    "Description of the issue"
+    description: String!
+    "Photos of the issue"
+    photos: [Upload]
+    "Title of the issue"
+    title: String!
+}
+
+input MeInput {
+    avatar: Upload
+    display_name: String
+    first_name: String
+    last_name: String
+    phone: String
 }
 
 "Allows ordering a list of records."
 input OrderByClause {
-  "The column that is used for ordering."
-  field: String!
-  "The direction that is used for ordering."
-  order: SortOrder!
+    "The column that is used for ordering."
+    field: String!
+    "The direction that is used for ordering."
+    order: SortOrder!
 }
 
 input PasswordLoginInput {
-  email: String
-  password: String
+    email: String
+    password: String
 }
 
+
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date
 
 "A datetime and timezone string in ISO 8601 format `Y-m-dTH:i:sO`, e.g. `2020-04-20T13:53:12+02:00`."
 scalar DateTimeTz
 
-"A date string with format `Y-m-d`, e.g. `2011-05-23`."
-scalar Date
+"Can be used as an argument to upload files using https://github.com/jaydenseric/graphql-multipart-request-spec"
+scalar Upload
 
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime

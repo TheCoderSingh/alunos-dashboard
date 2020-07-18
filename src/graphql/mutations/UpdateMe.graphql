@@ -1,0 +1,25 @@
+mutation (
+    $first_name: String
+    $last_name: String
+    $display_name: String
+    $phone: String
+    $avatar: Upload
+)  {
+    updateMe(
+        input: {
+            first_name: $first_name
+            last_name: $last_name
+            display_name: $display_name
+            phone: $phone
+            avatar: $avatar
+        }
+    ) {
+        id
+        display_name
+        email
+        avatar {
+            url
+        }
+        phone
+    }
+}

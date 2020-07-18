@@ -35,8 +35,20 @@ const routes = [
                 name: 'households',
             },
             {
+                path: 'households/details/:id', component: () => import('pages/households/HouseholdDetails.vue'),
+                name: 'households.details',
+            },
+            {
                 path: 'students', component: () => import('pages/students/StudentList.vue'),
                 name: 'students',
+            },
+            {
+                path: 'admins', component: () => import('pages/admins/AdminList.vue'),
+                name: 'admins',
+            },
+            {
+                path: 'me', component: () => import('pages/me/UpdateMe.vue'),
+                name: 'me',
             },
         ]
     },

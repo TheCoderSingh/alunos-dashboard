@@ -19,6 +19,7 @@
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
+    "apollo-upload-client": "^13.0.0",
     "core-js": "^3.6.5",
     "flag-icon-css": "^3.5.0",
     "graphql": "^15.1.0",

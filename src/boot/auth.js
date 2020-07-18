@@ -1,5 +1,5 @@
 import { Cookies } from 'quasar'
-import {TOKEN_COOKIE} from "src/constants";
+import {GET_LOGGED_ADMIN_ACTION, TOKEN_COOKIE} from "src/constants";
 import {displayWarning} from "src/utils/notify";
 import {getMostSpecificRouteMeta} from "src/router";
 
@@ -7,8 +7,7 @@ import {getMostSpecificRouteMeta} from "src/router";
 
 
 export default async ({ app, router, store, Vue }) => {
-    console.log(Cookies.getAll());
-    router.beforeEach((to, from, next) => {
+    router.beforeEach(async (to, from, next) => {
         if (!to.matched) {
             next();
         }
@@ -18,6 +17,8 @@ export default async ({ app, router, store, Vue }) => {
                 displayWarning("Please provide your credentials.", {position: 'top'});
                 return next({name: 'auth.login'});
             }
+
+            await store.dispatch(GET_LOGGED_ADMIN_ACTION);
         }
 
         if (getMostSpecificRouteMeta(to.matched, 'isPublicOnly')) {

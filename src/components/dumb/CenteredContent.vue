@@ -15,7 +15,7 @@
           vertical: {
               type: Boolean,
               default: false,
-          }
+          },
       },
       computed: {
           styles() {

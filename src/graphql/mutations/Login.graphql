@@ -8,12 +8,15 @@ mutation ($email: String, $password: String)  {
         }
         admin {
             user {
-                id,
-                display_name,
-                email,
-                phone,
-                created_at,
-                updated_at
+                id
+                first_name
+                last_name
+                display_name
+                email
+                avatar {
+                    url
+                }
+                phone
             }
             tenant {
                 name
