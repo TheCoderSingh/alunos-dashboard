@@ -1,0 +1,19 @@
+query ($householdId: ID!){
+    household(id: $householdId) {
+        id
+        name
+        description
+        address
+        type
+        city
+        avatar {
+            url
+        }
+        guidelines {
+            description
+        }
+        rooms {
+            name
+        }
+    }
+}

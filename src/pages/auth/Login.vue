@@ -29,7 +29,8 @@
                     />
 
                     <q-card-actions align="between">
-                        <router-link class="text-link" :to="{ name: 'dashboard' }">Forgot my password</router-link>
+<!--                        <router-link class="text-link" :to="{ name: 'dashboard' }">Forgot my password</router-link>-->
+                        <q-space></q-space>
                         <q-btn label="Login" type="submit" unelevated color="primary"/>
                     </q-card-actions>
                 </q-form>
@@ -49,8 +50,8 @@
         components: {CenteredContent},
         data: () => ({
             form: {
-                email: '',
-                password: '',
+                email: 'admin@langara.ca',
+                password: '123456',
             }
         }),
         methods: {

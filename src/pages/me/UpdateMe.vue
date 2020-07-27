@@ -30,16 +30,16 @@
 
                     <div class="row q-col-gutter-lg">
                         <div class="col-6">
-                            <q-input outlined v-model="form.email" disable label="Email" />
+                            <q-input filled v-model="form.email" disable label="Email" />
                         </div>
                         <div class="col-6">
-                            <q-input outlined v-model="form.display_name" label="Display Name" />
+                            <q-input filled v-model="form.display_name" label="Display Name" />
                         </div>
                         <div class="col-6">
-                            <q-input outlined v-model="form.first_name" label="First Name" />
+                            <q-input filled v-model="form.first_name" label="First Name" />
                         </div>
                         <div class="col-6">
-                            <q-input outlined v-model="form.last_name" label="Last Name" />
+                            <q-input filled v-model="form.last_name" label="Last Name" />
                         </div>
                     </div>
                 </q-card-section>

@@ -20,7 +20,8 @@
       computed: {
           styles() {
               return {
-                  'max-width': `${this.maxWidth}px`
+                  'max-width': `${this.maxWidth}px`,
+                  'padding-bottom': '24px'
               };
           }
       }

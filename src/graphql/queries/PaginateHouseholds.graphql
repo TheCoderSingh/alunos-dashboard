@@ -1,0 +1,15 @@
+query ($page: Int, $limit: Int){
+    households(page: $page, limit: $limit) {
+        total
+        items {
+            id
+            name
+            avatar {
+                url
+            }
+            address
+            type
+            city
+        }
+    }
+}

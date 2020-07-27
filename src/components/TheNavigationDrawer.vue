@@ -63,6 +63,15 @@
 <!--                    </q-list>-->
 <!--                </q-expansion-item>-->
 
+                <q-item class="drawer__item" v-ripple clickable :to="{ name: 'match' }">
+                    <q-item-section avatar class="drawer__icon">
+                        <q-icon name="las la-clone"/>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label>Find Placement</q-item-label>
+                    </q-item-section>
+                </q-item>
+
                 <q-item class="drawer__item" v-ripple clickable :to="{ name: 'students' }">
                     <q-item-section avatar class="drawer__icon">
                         <q-icon name="las la-graduation-cap"/>
@@ -74,7 +83,7 @@
 
                 <q-item class="drawer__item" v-ripple clickable :to="{ name: 'households' }">
                     <q-item-section avatar class="drawer__icon">
-                        <q-icon name="las la-home"/>
+                        <q-icon name="las la-campground"/>
                     </q-item-section>
                     <q-item-section>
                         <q-item-label>Households</q-item-label>
@@ -92,14 +101,14 @@
                     </q-item-section>
                 </q-item>
 
-                <q-item class="drawer__item " v-ripple clickable>
-                    <q-item-section avatar class="drawer__icon">
-                        <q-icon name="la la-cog"/>
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>Settings</q-item-label>
-                    </q-item-section>
-                </q-item>
+<!--                <q-item class="drawer__item " v-ripple clickable>-->
+<!--                    <q-item-section avatar class="drawer__icon">-->
+<!--                        <q-icon name="la la-cog"/>-->
+<!--                    </q-item-section>-->
+<!--                    <q-item-section>-->
+<!--                        <q-item-label>Settings</q-item-label>-->
+<!--                    </q-item-section>-->
+<!--                </q-item>-->
             </q-list>
         </q-scroll-area>
     </q-drawer>

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
+import {store} from "src/store";
+import {HIDE_RIGHT_DRAWER, SHOW_RIGHT_DRAWER} from "src/constants";
 
 Vue.use(VueRouter);
 
@@ -15,10 +17,21 @@ export const router = new VueRouter({
     base: process.env.VUE_ROUTER_BASE
 });
 
+router.beforeEach(async (to, from, next) => {
+    const route = to.matched[to.matched.length - 1];
+
+    if (route && route.components && route.components.drawer) {
+        await store.dispatch(SHOW_RIGHT_DRAWER);
+    } else {
+        await store.dispatch(HIDE_RIGHT_DRAWER);
+    }
+
+    next();
+});
+
 export default function (/* { store, ssrContext } */) {
     return router
 }
-
 
 // Go through all the children (most specific first) and return the first found meta key
 // Meaning that child overwrites the parents meta

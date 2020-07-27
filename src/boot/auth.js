@@ -18,7 +18,9 @@ export default async ({ app, router, store, Vue }) => {
                 return next({name: 'auth.login'});
             }
 
-            await store.dispatch(GET_LOGGED_ADMIN_ACTION);
+            if (store.getters.getCurrentUser === null) {
+                await store.dispatch(GET_LOGGED_ADMIN_ACTION);
+            }
         }
 
         if (getMostSpecificRouteMeta(to.matched, 'isPublicOnly')) {

@@ -41,14 +41,26 @@ type FeedEntries {
 }
 
 type FeedEntry {
+    "Attachments of the entry"
+    attachments: [FileUpload]!
+    "Author of the entry"
     author: FeedAuthor
+    "Content of the entry"
     content: String!
+    "Creation date of the entry"
     created_at: DateTimeTz
+    "The title"
+    title: String!
 }
 
 type FileUpload {
-    mime: String
+    "Mime type of the file"
+    mimetype: String
+    "Original name of the file"
     name: String
+    "Size of the file"
+    size: Int
+    "Public URL of the file"
     url: String
 }
 
@@ -74,21 +86,45 @@ type Hobby {
 }
 
 type Household {
+    "Address of the household"
     address: String!
-    created_at: String!
+    "Avatar of the household"
+    avatar: FileUpload
+    "City of the household"
+    city: String!
+    "Date of creation of the household"
+    created_at: DateTimeTz!
+    "Description of the household"
+    description: String
+    "Rules of the household"
     guidelines: [Guideline]
+    "Unique identifier"
     id: ID!
+    "Name of the household"
     name: String!
+    "Landline phone of the household"
+    phone: String
+    "Photos of the household"
+    photos: [FileUpload]
+    "Residents of the household"
     residents: [Resident]
+    "Rooms of the household"
     rooms: [Room]
+    "Type of the household"
     type: HouseholdType!
-    updated_at: String!
+}
+
+type HouseholdPagination {
+    items: [Household]
+    total: Int
 }
 
 type Issue {
+    "Photos or documents attached to issue"
+    attachments: [FileUpload]!
     "The author of the issue report"
     author: Resident
-    "Desscription of the issue"
+    "Description of the issue"
     description: String!
     "Unique identifier"
     id: ID!
@@ -109,7 +145,7 @@ type Language {
 }
 
 type Mutation {
-    createFeedEntry(input: FeedEntryInput): Issue
+    createFeedEntry(input: FeedEntryInput): FeedEntry
     createIssue(input: IssueInput): Issue
     loginAsAdmin(credentials: PasswordLoginInput): AdminAccess
     loginAsResident(token: String): ResidentAccess
@@ -208,6 +244,13 @@ type Query {
         "Household unique identifier"
         id: ID
     ): Household
+    "Paginate availables households"
+    households(
+        "Number of elements per page"
+        limit: Int = 10,
+        "Page"
+        page: Int = 1
+    ): HouseholdPagination
     "Get announcements of household"
     issues(
         "Household unique identifier"
@@ -310,12 +353,16 @@ enum Trashed {
 }
 
 input FeedEntryInput {
+    "Photos or documents to attach to the entry"
+    attachments: [Upload]
     "Unique identifier of the resident who is posting"
     author_id: ID!
     "The content"
     content: String!
     "Household unique identifier"
     household_id: ID!
+    "The title"
+    title: String!
 }
 
 input FoodPreferenceInput {
@@ -326,12 +373,12 @@ input FoodPreferenceInput {
 }
 
 input IssueInput {
+    "Photos or documents to attach to the issue"
+    attachments: [Upload]
     "The identifier of the resident who reported the issue"
     author_id: ID!
     "Description of the issue"
     description: String!
-    "Photos of the issue"
-    photos: [Upload]
     "Title of the issue"
     title: String!
 }

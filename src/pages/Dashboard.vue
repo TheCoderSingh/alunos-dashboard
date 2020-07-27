@@ -27,7 +27,7 @@
             </div>
             <div class="col">
                 <indicator-card
-                    icon="las la-home"
+                    icon="las la-campground"
                     icon-color="brown-4"
                     color="brown-1"
                     caption="New Households"

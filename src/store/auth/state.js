@@ -1,4 +1,6 @@
 export default () => ({
     token: {},
-    admin: {},
+    admin: {
+        user: null,
+    },
 });

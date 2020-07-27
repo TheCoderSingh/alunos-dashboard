@@ -9,7 +9,7 @@
         <q-card-section>
             <div class="text-h5">{{ name }}</div>
             <div>{{ email }}</div>
-            <q-btn class="q-mt-lg full-width" flat color="primary" :to="to">Manage</q-btn>
+<!--            <q-btn class="q-mt-lg full-width" flat color="primary" :to="to">Manage</q-btn>-->
         </q-card-section>
     </q-card>
 </template>
